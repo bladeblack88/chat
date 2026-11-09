@@ -1,0 +1,37 @@
+name: Build stanyhoi APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android APK with Expo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Align Expo packages
+        run: npx expo install --fix
+
+      - name: Install aligned dependencies
+        run: npm install
+
+      - name: Link Expo project
+        run: npx eas-cli@latest init --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build installable APK
+        run: npx eas-cli@latest build --platform android --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}

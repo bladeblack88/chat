@@ -1,43 +1,38 @@
 # stanyhoi
 
-A mobile messenger project built with Expo, React Native, TypeScript, and Expo Router.
+A mobile messenger prototype built with Expo, React Native, TypeScript, and Expo Router.
 
 ## Current status
 
-- [x] Initial mobile project structure
-- [x] Russian chats home screen
-- [x] Search chats
-- [x] Filter unread chats
-- [ ] User registration and login
-- [ ] Real-time messaging
-- [ ] Supabase backend
-- [ ] User profiles and settings
+- Initial mobile project structure
+- Russian chats home screen
+- Search and unread-chat filter
+- Android APK build profile (Expo EAS)
+- Chat list currently uses sample data; real messaging and accounts are not connected yet
 
-## Run the app
+## Build an Android APK
 
-Install Node.js, then run:
+This repository includes a GitHub Actions workflow at **Actions → Build stanyhoi APK**.
 
-```bash
-npm install
-npx expo start
-```
+1. Create an Expo account at https://expo.dev/signup.
+2. Create an access token in your Expo account settings: https://expo.dev/settings/access-tokens.
+3. In this GitHub repository, open **Settings → Secrets and variables → Actions → New repository secret**.
+4. Set the secret name to `EXPO_TOKEN` and paste your Expo access token as its value. Never put the token in a source file or send it in chat.
+5. Open **Actions → Build stanyhoi APK → Run workflow**.
+6. Wait for the job to finish. The build link will be shown in the workflow log and in your Expo account at https://expo.dev/.
 
-Open the project with Expo Go on your phone by scanning the QR code.
+The workflow builds an installable Android APK using the `preview` profile. EAS Build may ask for Android signing credentials the first time; allow Expo to generate and manage them.
 
 ## Project structure
 
 ```
-src/
-  app/
-    _layout.tsx
-    index.tsx
+src/app/
+  _layout.tsx
+  index.tsx
 app.json
+eas.json
 package.json
 tsconfig.json
 ```
 
 The app is named **stanyhoi**. The GitHub repository is **chat**.
-
-## Learning note
-
-This is the first visual prototype. The chat list currently uses sample data; messages are not sent to other people yet.
